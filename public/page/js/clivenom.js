@@ -5,7 +5,7 @@ function cliStatus(dir_link) {
     var SessionName = $("#SessionName").val();
     $.ajax({
         type: 'POST',
-        url: 'http://10.10.0.210:9000/sistema/Status',
+        url: 'http://localhost:9000/sistema/Status',
         data: {
             SessionName: SessionName
         },
@@ -89,7 +89,7 @@ function startVenon(dir_link) {
     var SessionName = $("#SessionName").val();
     $.ajax({
         method: "POST",
-        url: 'http://10.10.0.210:9000/sistema/Start',
+        url: 'http://localhost:9000/sistema/Start',
         data: {
             SessionName: SessionName
         },
@@ -146,7 +146,7 @@ function closeVenon(dir_link) {
     var SessionName = $("#SessionName").val();
     $.ajax({
         method: "POST",
-        url: 'http://10.10.0.210:9000/sistema/Close',
+        url: 'http://localhost:9000/sistema/Close',
         data: {
             SessionName: SessionName
         },
@@ -190,7 +190,7 @@ function qrcodeVenon(dir_link) {
     var SessionName = $("#SessionName").val();
     $.ajax({
         method: "POST",
-        url: 'http://10.10.0.210:9000/sistema/QRCode',
+        url: 'http://localhost:9000/sistema/QRCode',
         data: {
             SessionName: SessionName,
             View: false
@@ -215,7 +215,7 @@ function getHostDevice(dir_link) {
     var SessionName = $("#SessionName").val();
     $.ajax({
         method: "POST",
-        url: 'http://10.10.0.210:9000/sistema/getHostDevice',
+        url: 'http://localhost:9000/sistema/getHostDevice',
         data: {
             SessionName: SessionName
         },
@@ -248,7 +248,7 @@ function RestartService(dir_link) {
     var SessionName = $("#SessionName").val();
     $.ajax({
         method: "POST",
-        url: 'http://10.10.0.210:9000/sistema/restartService',
+        url: 'http://localhost:9000/sistema/restartService',
         data: {
             SessionName: SessionName
         },
