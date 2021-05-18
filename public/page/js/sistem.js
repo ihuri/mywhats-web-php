@@ -38,7 +38,7 @@ function uuidv4() {
     );
 }
 //
-$('document').ready(function () {
+$('document').ready(function() {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     // Onde estou
@@ -46,13 +46,13 @@ $('document').ready(function () {
     var domain = ResponseURL.split('/');
     var dir_local = domain[domain.length - 2];
     const dir_link = domain[domain.length - 4];
-    console.log('Local: '+dir_local);
-    console.log('Link: '+dir_link);
+    console.log('Local: ' + dir_local);
+    console.log('Link: ' + dir_link);
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
     //Celular
-    jQuery.validator.addMethod('celular', function (value, element) {
+    jQuery.validator.addMethod('celular', function(value, element) {
         value = value.replace("(", "");
         value = value.replace(")", "");
         value = value.replace("-", "");
@@ -75,7 +75,7 @@ $('document').ready(function () {
     }, 'Informe um celular válido');
 
     //Telefone fixo
-    jQuery.validator.addMethod('telefone', function (value, element) {
+    jQuery.validator.addMethod('telefone', function(value, element) {
         value = value.replace("(", "");
         value = value.replace(")", "");
         value = value.replace("-", "");
@@ -98,8 +98,9 @@ $('document').ready(function () {
     }, 'Informe um telefone válido!');
 
     //
-    jQuery.validator.addMethod("filesize_max", function (value, element, param) {
-        var isOptional = this.optional(element), file;
+    jQuery.validator.addMethod("filesize_max", function(value, element, param) {
+        var isOptional = this.optional(element),
+            file;
 
         if (isOptional) {
             return isOptional;
@@ -113,7 +114,7 @@ $('document').ready(function () {
                 return (file.size && file.size <= param * 1024000);
             }
         }
-        
+
         return false;
     }, 'O arquivo selecionado deve ser de no máximo {0} MB.');
     //
@@ -140,30 +141,30 @@ $('document').ready(function () {
                 maxlength: "A mensagem deve conter no máximo 6.700 caracteres."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var data = $("#sendText-form").serialize();
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:9000/sistema/sendText',
+                url: 'http://10.10.0.210:9000/sistema/sendText',
                 data: data,
                 dataType: 'json',
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#sendTexto").html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
                 },
-                success: function (response) {
+                success: function(response) {
                     if (response.result == 'error' && response.state == 'NOTFOUND') {
                         $("#sendTexto").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
@@ -194,7 +195,7 @@ $('document').ready(function () {
                             msg: response.message
                         });
                         //
-                    }  else if (response.result == 'info' && response.state == 'CLOSED') {
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
                         $("#sendTexto").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
                         Lobibox.notify('error', {
@@ -323,34 +324,34 @@ $('document').ready(function () {
                 maxlength: "A mensagem deve conter no máximo 6.700 caracteres."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var form = $('#sendImage-form')[0];
             var data = new FormData(form);
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-                url: 'http://localhost:9000/sistema/sendImage',
+                url: 'http://10.10.0.210:9000/sistema/sendImage',
                 data: data,
                 processData: false, //prevent jQuery from automatically transforming the data into a query string
                 contentType: false,
                 cache: false,
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#sendImage").html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
                 },
-                success: function (response) {
+                success: function(response) {
                     if (response.result == 'error' && response.state == 'NOTFOUND') {
                         $("#sendImage").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
@@ -381,7 +382,7 @@ $('document').ready(function () {
                             msg: response.message
                         });
                         //
-                    }  else if (response.result == 'info' && response.state == 'CLOSED') {
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
                         $("#sendImage").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
                         Lobibox.notify('error', {
@@ -503,34 +504,34 @@ $('document').ready(function () {
                 maxlength: "A mensagem deve conter no máximo 6.700 caracteres."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var form = $('#sendTextMassa-form')[0];
             var data = new FormData(form);
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-                url: 'http://localhost:9000/sistema/sendTextMult',
+                url: 'http://10.10.0.210:9000/sistema/sendTextMult',
                 data: data,
                 processData: false, //prevent jQuery from automatically transforming the data into a query string
                 contentType: false,
                 cache: false,
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#sendTextMassa").html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
                 },
-                success: function (response) {
+                success: function(response) {
                     //https://www.geeksforgeeks.org/how-to-fetch-data-from-json-file-and-display-in-html-table-using-jquery/
                     $("#sendTextMassa").html('<i class="fas fa-paper-plane"></i> Enviar');
                     var table_success = '';
@@ -566,7 +567,7 @@ $('document').ready(function () {
                             msg: response.message
                         });
                         //
-                    }  else if (response.result == 'info' && response.state == 'CLOSED') {
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
                         $("#sendTextMassa").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
                         Lobibox.notify('error', {
@@ -599,7 +600,7 @@ $('document').ready(function () {
                     } else {
                         //
                         // ITERATING THROUGH OBJECTS 
-                        $.each(response.sendResult, function (key, value) {
+                        $.each(response.sendResult, function(key, value) {
                             if (value.erro == false && value.status == 'OK') {
                                 //CONSTRUCTION OF ROWS HAVING 
                                 // DATA FROM JSON OBJECT 
@@ -682,34 +683,34 @@ $('document').ready(function () {
                 maxlength: "A mensagem deve conter no máximo 6.700 caracteres."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var form = $('#sendFileImgMassa-form')[0];
             var data = new FormData(form);
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-                url: 'http://localhost:9000/sistema/sendImageMult',
+                url: 'http://10.10.0.210:9000/sistema/sendImageMult',
                 data: data,
                 processData: false, //prevent jQuery from automatically transforming the data into a query string
                 contentType: false,
                 cache: false,
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#sendFileImgMassa").html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
                 },
-                success: function (response) {
+                success: function(response) {
                     //https://www.geeksforgeeks.org/how-to-fetch-data-from-json-file-and-display-in-html-table-using-jquery/
                     $("#sendFileImgMassa").html('<i class="fas fa-paper-plane"></i> Enviar');
                     var table_success = '';
@@ -745,7 +746,7 @@ $('document').ready(function () {
                             msg: response.message
                         });
                         //
-                    }  else if (response.result == 'info' && response.state == 'CLOSED') {
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
                         $("#sendFileImgMassa").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
                         Lobibox.notify('error', {
@@ -777,7 +778,7 @@ $('document').ready(function () {
                         //
                     } else {
                         // ITERATING THROUGH OBJECTS 
-                        $.each(response.sendResult, function (key, value) {
+                        $.each(response.sendResult, function(key, value) {
                             if (value.erro == false && value.status == 'OK') {
                                 //CONSTRUCTION OF ROWS HAVING 
                                 // DATA FROM JSON OBJECT 
@@ -848,91 +849,91 @@ $('document').ready(function () {
                 maxlength: "A mensagem deve conter no máximo 6.700 caracteres."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var data = $("#sendTextGrupo-form").serialize();
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:9000/sistema/sendTextGrupo',
+                url: 'http://10.10.0.210:9000/sistema/sendTextGrupo',
                 data: data,
                 dataType: 'json',
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#sendTextGrupo").html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
                 },
-                success: function (response) {
-                if (response.result == 'error' && response.state == 'NOTFOUND') {
-                    $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
-                    //
-                    Lobibox.notify('error', {
-                        title: false,
-                        soundPath: '../public/lobibox/sounds/',
-                        soundExt: '.ogg',
-                        sound: true,
-                        iconSource: "fontAwesome",
-                        icon: 'fas fa-times-circle',
-                        size: 'mini',
-                        delay: 5000,
-                        msg: response.message
-                    });
-                    //
-                } else if (response.result == 'info' && response.state == 'STARTING') {
-                    $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
-                    //
-                    Lobibox.notify('warning', {
-                        title: false,
-                        soundPath: '../public/lobibox/sounds/',
-                        soundExt: '.ogg',
-                        sound: true,
-                        iconSource: "fontAwesome",
-                        icon: 'fas fa-times-circle',
-                        size: 'mini',
-                        delay: 5000,
-                        msg: response.message
-                    });
-                    //
-                }  else if (response.result == 'info' && response.state == 'CLOSED') {
-                    $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
-                    //
-                    Lobibox.notify('error', {
-                        title: false,
-                        soundPath: '../public/lobibox/sounds/',
-                        soundExt: '.ogg',
-                        sound: true,
-                        iconSource: "fontAwesome",
-                        icon: 'fas fa-times-circle',
-                        size: 'mini',
-                        delay: 5000,
-                        msg: response.message
-                    });
-                    //
-                } else if (response.result == 'warning' && response.state == 'QRCODE') {
-                    $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
-                    //
-                    Lobibox.notify('info', {
-                        title: false,
-                        soundPath: '../public/lobibox/sounds/',
-                        soundExt: '.ogg',
-                        sound: true,
-                        iconSource: "fontAwesome",
-                        icon: 'fas fa-times-circle',
-                        size: 'mini',
-                        delay: 5000,
-                        msg: response.message
-                    });
-                    //
-                } else if (response !== false) {
+                success: function(response) {
+                    if (response.result == 'error' && response.state == 'NOTFOUND') {
+                        $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
+                        //
+                        Lobibox.notify('error', {
+                            title: false,
+                            soundPath: '../public/lobibox/sounds/',
+                            soundExt: '.ogg',
+                            sound: true,
+                            iconSource: "fontAwesome",
+                            icon: 'fas fa-times-circle',
+                            size: 'mini',
+                            delay: 5000,
+                            msg: response.message
+                        });
+                        //
+                    } else if (response.result == 'info' && response.state == 'STARTING') {
+                        $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
+                        //
+                        Lobibox.notify('warning', {
+                            title: false,
+                            soundPath: '../public/lobibox/sounds/',
+                            soundExt: '.ogg',
+                            sound: true,
+                            iconSource: "fontAwesome",
+                            icon: 'fas fa-times-circle',
+                            size: 'mini',
+                            delay: 5000,
+                            msg: response.message
+                        });
+                        //
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
+                        $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
+                        //
+                        Lobibox.notify('error', {
+                            title: false,
+                            soundPath: '../public/lobibox/sounds/',
+                            soundExt: '.ogg',
+                            sound: true,
+                            iconSource: "fontAwesome",
+                            icon: 'fas fa-times-circle',
+                            size: 'mini',
+                            delay: 5000,
+                            msg: response.message
+                        });
+                        //
+                    } else if (response.result == 'warning' && response.state == 'QRCODE') {
+                        $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
+                        //
+                        Lobibox.notify('info', {
+                            title: false,
+                            soundPath: '../public/lobibox/sounds/',
+                            soundExt: '.ogg',
+                            sound: true,
+                            iconSource: "fontAwesome",
+                            icon: 'fas fa-times-circle',
+                            size: 'mini',
+                            delay: 5000,
+                            msg: response.message
+                        });
+                        //
+                    } else if (response !== false) {
                         $("#sendTextGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
                         Lobibox.notify('success', {
@@ -1030,34 +1031,34 @@ $('document').ready(function () {
                 maxlength: "A mensagem deve conter no máximo 6.700 caracteres."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var form = $('#sendFileImgGrupo-form')[0];
             var data = new FormData(form);
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-                url: 'http://localhost:9000/sistema/sendImageGrupo',
+                url: 'http://10.10.0.210:9000/sistema/sendImageGrupo',
                 data: data,
                 processData: false, //prevent jQuery from automatically transforming the data into a query string
                 contentType: false,
                 cache: false,
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#sendFileImgGrupo").html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
                 },
-                success: function (response) {
+                success: function(response) {
                     if (response.result == 'error' && response.state == 'NOTFOUND') {
                         $("#sendFileImgGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
@@ -1088,7 +1089,7 @@ $('document').ready(function () {
                             msg: response.message
                         });
                         //
-                    }  else if (response.result == 'info' && response.state == 'CLOSED') {
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
                         $("#sendFileImgGrupo").html('<i class="fas fa-paper-plane"></i> Enviar');
                         //
                         Lobibox.notify('error', {
@@ -1200,30 +1201,30 @@ $('document').ready(function () {
                 celular: "Informe um celular válido."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var data = $("#checkNumberStatus-form").serialize();
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:9000/sistema/checkNumberStatus',
+                url: 'http://10.10.0.210:9000/sistema/checkNumberStatus',
                 data: data,
                 dataType: 'json',
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#checkNumberStatus").html('<i class="fas fa-spinner fa-spin"></i> Checando...');
                 },
-                success: function (response) {
+                success: function(response) {
                     if (response.result == 'error' && response.state == 'NOTFOUND') {
                         $("#checkNumberStatus").html('<i class="fas fa-paper-plane"></i> Checar');
                         //
@@ -1254,7 +1255,7 @@ $('document').ready(function () {
                             msg: response.message
                         });
                         //
-                    }  else if (response.result == 'info' && response.state == 'CLOSED') {
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
                         $("#checkNumberStatus").html('<i class="fas fa-paper-plane"></i> Checar');
                         //
                         Lobibox.notify('error', {
@@ -1368,34 +1369,34 @@ $('document').ready(function () {
                 filesize_max: "O arquivo selecionado deve ser de no máximo {0} MB."
             }
         },
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             $(element).closest('.form-group').find('.help-block').html(error.html());
         },
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).closest('.form-control').removeClass('is-valid').addClass('is-invalid');
             $(element).closest('.custom-select').removeClass('is-valid').addClass('is-invalid');
         },
-        unhighlight: function (element, errorClass, validClass) {
+        unhighlight: function(element, errorClass, validClass) {
             $(element).closest('.form-group').find('.help-block').html('');
             $(element).closest('.form-control').removeClass('is-invalid').addClass('is-valid');
             $(element).closest('.custom-select').removeClass('is-invalid').addClass('is-valid');
         },
-        submitHandler: function () {
+        submitHandler: function() {
             event.preventDefault();
             var form = $('#checkNumberStatusMassa-form')[0];
             var data = new FormData(form);
             $.ajax({
                 type: "POST",
                 enctype: 'multipart/form-data',
-                url: 'http://localhost:9000/sistema/checkNumberStatusMult',
+                url: 'http://10.10.0.210:9000/sistema/checkNumberStatusMult',
                 data: data,
                 processData: false, //prevent jQuery from automatically transforming the data into a query string
                 contentType: false,
                 cache: false,
-                beforeSend: function () {
+                beforeSend: function() {
                     $("#checkNumberStatusMassa").html('<i class="fas fa-spinner fa-spin"></i> Checando...');
                 },
-                success: function (response) {
+                success: function(response) {
                     //https://www.geeksforgeeks.org/how-to-fetch-data-from-json-file-and-display-in-html-table-using-jquery/
                     $("#checkNumberStatusMassa").html('<i class="fas fa-paper-plane"></i> Checar');
                     var table_success = '';
@@ -1431,7 +1432,7 @@ $('document').ready(function () {
                             msg: response.message
                         });
                         //
-                    }  else if (response.result == 'info' && response.state == 'CLOSED') {
+                    } else if (response.result == 'info' && response.state == 'CLOSED') {
                         $("#checkNumberStatusMassa").html('<i class="fas fa-paper-plane"></i> Checar');
                         //
                         Lobibox.notify('error', {
@@ -1463,7 +1464,7 @@ $('document').ready(function () {
                         //
                     } else {
                         // ITERATING THROUGH OBJECTS 
-                        $.each(response.sendResult, function (key, value) {
+                        $.each(response.sendResult, function(key, value) {
                             //CONSTRUCTION OF ROWS HAVING 
                             // DATA FROM JSON OBJECT
                             if (value.number) {
@@ -1512,7 +1513,7 @@ $('document').ready(function () {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
-    $("#fileimg").on("change", function () {
+    $("#fileimg").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings("#fileName-labe").addClass("selected").html(fileName);
         $('#fileName').val(fileName);
@@ -1520,7 +1521,7 @@ $('document').ready(function () {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
-    $("#sendTextMassaContato").on("change", function () {
+    $("#sendTextMassaContato").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings("#sendTextMassaContato-label").addClass("selected").html(fileName);
         $('#filesendTextMassaContato').val(fileName);
@@ -1528,7 +1529,7 @@ $('document').ready(function () {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
-    $("#sendImageMassaContato").on("change", function () {
+    $("#sendImageMassaContato").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings("#sendImageMassaContato-label").addClass("selected").html(fileName);
         $('#fileNamesendImageMassaContato').val(fileName);
@@ -1536,7 +1537,7 @@ $('document').ready(function () {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
-    $("#FileImageMassa").on("change", function () {
+    $("#FileImageMassa").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings("#FileImageMassa-label").addClass("selected").html(fileName);
         $('#FileNameImageMassa').val(fileName);
@@ -1544,7 +1545,7 @@ $('document').ready(function () {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
-    $("#FileImageGrupo").on("change", function () {
+    $("#FileImageGrupo").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings("#FileImageGrupo-label").addClass("selected").html(fileName);
         $('#FileNameImageGrupo').val(fileName);
@@ -1552,7 +1553,7 @@ $('document').ready(function () {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
-    $("#checkNumberStatusMassaContato").on("change", function () {
+    $("#checkNumberStatusMassaContato").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings("#checkNumberStatusMassaContato-label").addClass("selected").html(fileName);
         $('#filecheckNumberStatusMassaContato').val(fileName);
@@ -1560,7 +1561,7 @@ $('document').ready(function () {
     //
     //---------------------------------------------------------------------------------------------------------------------------------------------------//
     //
-    $("#BotaoGrupoText").on("click", function () {
+    $("#BotaoGrupoText").on("click", function() {
         //https://www.codebyamir.com/blog/populate-a-select-dropdown-list-with-json
         let dropdown = $('#TextGrupo');
         dropdown.empty();
@@ -1569,24 +1570,24 @@ $('document').ready(function () {
         var SessionName = $("#SessionName").val();
         $.ajax({
             type: "POST",
-            url: 'http://localhost:9000/sistema/getAllGroups/',
-            data: { "SessionName": SessionName },        
+            url: 'http://10.10.0.210:9000/sistema/getAllGroups/',
+            data: { "SessionName": SessionName },
             //dataType: 'json',
-            beforeSend: function () {
+            beforeSend: function() {
                 $("#BotaoGrupoText").html('<i class="fas fa-spinner fa-spin"></i> Carregando...');
             },
-            success: function (response) {
+            success: function(response) {
                 //
                 $("#BotaoGrupoText").html('Carregar Grupos');
                 //
-                $.each(response, function (key, value) {
+                $.each(response, function(key, value) {
                     dropdown.append($('<option></option>').attr('value', value.contact.id.user).text(value.contact.name));
                 });
             }
         });
     });
     //
-    $("#BotaoGrupoImg").on("click", function () {
+    $("#BotaoGrupoImg").on("click", function() {
         //https://www.codebyamir.com/blog/populate-a-select-dropdown-list-with-json
         let dropdown = $('#ImgGrupo');
         dropdown.empty();
@@ -1595,153 +1596,153 @@ $('document').ready(function () {
         var SessionName = $("#SessionName").val();
         $.ajax({
             type: "POST",
-            url: 'http://localhost:9000/sistema/getAllGroups/',
-            data: { "SessionName": SessionName },      
+            url: 'http://10.10.0.210:9000/sistema/getAllGroups/',
+            data: { "SessionName": SessionName },
             //dataType: 'json',
-            beforeSend: function () {
+            beforeSend: function() {
                 $("#BotaoGrupoImg").html('<i class="fas fa-spinner fa-spin"></i> Carregando...');
             },
-            success: function (response) {
+            success: function(response) {
                 //
                 $("#BotaoGrupoImg").html('Carregar Grupos');
                 //
-                $.each(response, function (key, value) {
+                $.each(response, function(key, value) {
                     dropdown.append($('<option></option>').attr('value', value.contact.id.user).text(value.contact.name));
                 });
             }
         });
     });
-   //
-   $("#getBlockList").on("click", function () {
-    $('#table_success').html('');
-    var SessionName = $("#SessionName").val();
-    event.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: 'http://localhost:9000/sistema/getBlockList',
-        data: { "SessionName": SessionName },
-        beforeSend: function () {
-            $("#getBlockList").html('<i class="fas fa-spinner fa-spin"></i> Carregando...');
-        },
-        success: function (response) {
-            //console.log(response);
-            //https://www.geeksforgeeks.org/how-to-fetch-data-from-json-file-and-display-in-html-table-using-jquery/
-            $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar contatos bloqueados');
-            var table_success = '';
-            //
-            if (response.result == 'error' && response.state == 'NOTFOUND') {
-                $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
-                //
-                Lobibox.notify('warning', {
-                    title: false,
-                    soundPath: '../public/lobibox/sounds/',
-                    soundExt: '.ogg',
-                    sound: true,
-                    iconSource: "fontAwesome",
-                    icon: 'fas fa-times-circle',
-                    size: 'mini',
-                    delay: 5000,
-                    msg: response.message
-                });
-                //
-            } else if (response.result == 'info' && response.state == 'STARTING') {
-                $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
-                //
-                Lobibox.notify('warning', {
-                    title: false,
-                    soundPath: '../public/lobibox/sounds/',
-                    soundExt: '.ogg',
-                    sound: true,
-                    iconSource: "fontAwesome",
-                    icon: 'fas fa-times-circle',
-                    size: 'mini',
-                    delay: 5000,
-                    msg: response.message
-                });
-                //
-            } else if (response.result == 'warning' && response.state == 'QRCODE') {
-                $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
-                //
-                Lobibox.notify('warning', {
-                    title: false,
-                    soundPath: '../public/lobibox/sounds/',
-                    soundExt: '.ogg',
-                    sound: true,
-                    iconSource: "fontAwesome",
-                    icon: 'fas fa-times-circle',
-                    size: 'mini',
-                    delay: 5000,
-                    msg: response.message
-                });
-                //
-            } else {
-                var count = 1;
-                // ITERATING THROUGH OBJECTS
-                table_success += '<table id="org_tabela" class="table table-striped table-hover">';
-                table_success += '<thead class="thead-dark">';
-                table_success += '<tr>';
-                table_success += '<th scope="col">#</th>';
-                table_success += '<th scope="col">Numero</th>';
-                table_success += '<th scope="col">Foto Perfil</th>';
-                table_success += '</tr>';
-                table_success += '</thead>';
-                table_success += '<tbody id="table_success"></tbody>';
-
-                $.each(response.BlockList, function (key, value) {
-                    //CONSTRUCTION OF ROWS HAVING 
-                    // DATA FROM JSON OBJECT
-                    if (value) {
-                        var strData = value.toString().replace('@c.us', '');
-                        table_success += '<tr>';
-                        table_success += '<td>' + count + '</td>';
-                        table_success += '<td>'+strData+'</td>';
-                        table_success += '<td><img class="img-fluid" src="../public/imagens/sem-foto.jpg" style="width: 28px; height: 28px"></td>';
-                        table_success += '</tr>';
-                        count++;
-                    }
-                });
-                table_success += '</tbody>';
-                table_success += '</table>';
-                $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
-                //
-                table_success += '</table>';
-                //INSERTING ROWS INTO TABLE
-                $('#table_success').html(table_success);
-                //
-            }
-        },
-        error: (e) => {
-            $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
-            //
-            Lobibox.notify('info', {
-                title: false,
-                soundPath: '../public/lobibox/sounds/',
-                soundExt: '.ogg',
-                sound: true,
-                iconSource: "fontAwesome",
-                icon: 'fas fa-info-circle',
-                size: 'mini',
-                delay: 5000,
-                msg: 'Erro interno, não foi possivel listar bloqueados!'
-            });
-
-        }
-
-    });
-});
-//
-    $("#getAllContacts").on("click", function () {
+    //
+    $("#getBlockList").on("click", function() {
         $('#table_success').html('');
         var SessionName = $("#SessionName").val();
         event.preventDefault();
         $.ajax({
             type: "POST",
-            url: 'http://localhost:9000/sistema/getAllContacts',
+            url: 'http://10.10.0.210:9000/sistema/getBlockList',
             data: { "SessionName": SessionName },
-            beforeSend: function () {
+            beforeSend: function() {
+                $("#getBlockList").html('<i class="fas fa-spinner fa-spin"></i> Carregando...');
+            },
+            success: function(response) {
+                //console.log(response);
+                //https://www.geeksforgeeks.org/how-to-fetch-data-from-json-file-and-display-in-html-table-using-jquery/
+                $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar contatos bloqueados');
+                var table_success = '';
+                //
+                if (response.result == 'error' && response.state == 'NOTFOUND') {
+                    $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
+                    //
+                    Lobibox.notify('warning', {
+                        title: false,
+                        soundPath: '../public/lobibox/sounds/',
+                        soundExt: '.ogg',
+                        sound: true,
+                        iconSource: "fontAwesome",
+                        icon: 'fas fa-times-circle',
+                        size: 'mini',
+                        delay: 5000,
+                        msg: response.message
+                    });
+                    //
+                } else if (response.result == 'info' && response.state == 'STARTING') {
+                    $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
+                    //
+                    Lobibox.notify('warning', {
+                        title: false,
+                        soundPath: '../public/lobibox/sounds/',
+                        soundExt: '.ogg',
+                        sound: true,
+                        iconSource: "fontAwesome",
+                        icon: 'fas fa-times-circle',
+                        size: 'mini',
+                        delay: 5000,
+                        msg: response.message
+                    });
+                    //
+                } else if (response.result == 'warning' && response.state == 'QRCODE') {
+                    $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
+                    //
+                    Lobibox.notify('warning', {
+                        title: false,
+                        soundPath: '../public/lobibox/sounds/',
+                        soundExt: '.ogg',
+                        sound: true,
+                        iconSource: "fontAwesome",
+                        icon: 'fas fa-times-circle',
+                        size: 'mini',
+                        delay: 5000,
+                        msg: response.message
+                    });
+                    //
+                } else {
+                    var count = 1;
+                    // ITERATING THROUGH OBJECTS
+                    table_success += '<table id="org_tabela" class="table table-striped table-hover">';
+                    table_success += '<thead class="thead-dark">';
+                    table_success += '<tr>';
+                    table_success += '<th scope="col">#</th>';
+                    table_success += '<th scope="col">Numero</th>';
+                    table_success += '<th scope="col">Foto Perfil</th>';
+                    table_success += '</tr>';
+                    table_success += '</thead>';
+                    table_success += '<tbody id="table_success"></tbody>';
+
+                    $.each(response.BlockList, function(key, value) {
+                        //CONSTRUCTION OF ROWS HAVING 
+                        // DATA FROM JSON OBJECT
+                        if (value) {
+                            var strData = value.toString().replace('@c.us', '');
+                            table_success += '<tr>';
+                            table_success += '<td>' + count + '</td>';
+                            table_success += '<td>' + strData + '</td>';
+                            table_success += '<td><img class="img-fluid" src="../public/imagens/sem-foto.jpg" style="width: 28px; height: 28px"></td>';
+                            table_success += '</tr>';
+                            count++;
+                        }
+                    });
+                    table_success += '</tbody>';
+                    table_success += '</table>';
+                    $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
+                    //
+                    table_success += '</table>';
+                    //INSERTING ROWS INTO TABLE
+                    $('#table_success').html(table_success);
+                    //
+                }
+            },
+            error: (e) => {
+                $("#getBlockList").html('<i class="fas fa-paper-plane"></i> Listar Contatos Bloqueados');
+                //
+                Lobibox.notify('info', {
+                    title: false,
+                    soundPath: '../public/lobibox/sounds/',
+                    soundExt: '.ogg',
+                    sound: true,
+                    iconSource: "fontAwesome",
+                    icon: 'fas fa-info-circle',
+                    size: 'mini',
+                    delay: 5000,
+                    msg: 'Erro interno, não foi possivel listar bloqueados!'
+                });
+
+            }
+
+        });
+    });
+    //
+    $("#getAllContacts").on("click", function() {
+        $('#table_success').html('');
+        var SessionName = $("#SessionName").val();
+        event.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: 'http://10.10.0.210:9000/sistema/getAllContacts',
+            data: { "SessionName": SessionName },
+            beforeSend: function() {
                 $("#getAllContacts").html('<i class="fas fa-spinner fa-spin"></i> Carregando...');
             },
-            success: function (response) {
+            success: function(response) {
                 //console.log(response);
                 //https://www.geeksforgeeks.org/how-to-fetch-data-from-json-file-and-display-in-html-table-using-jquery/
                 $("#getAllContacts").html('<i class="fas fa-paper-plane"></i> Listar contatos');
@@ -1796,38 +1797,38 @@ $('document').ready(function () {
                     var count = 1;
                     // ITERATING THROUGH OBJECTS
                     table_success += '<table id="org_tabela" class="table table-striped table-hover">';
-					table_success += '<thead class="thead-dark">';
+                    table_success += '<thead class="thead-dark">';
                     table_success += '<tr>';
                     table_success += '<th scope="col">#</th>';
                     table_success += '<th scope="col">Nome</th>';
                     table_success += '<th scope="col">Numero</th>';
                     table_success += '<th scope="col">Foto Perfil</th>';
                     table_success += '</tr>';
-					table_success += '</thead>';
-					table_success += '<tbody id="table_success"></tbody>';
+                    table_success += '</thead>';
+                    table_success += '<tbody id="table_success"></tbody>';
 
-                    $.each(response, function (key, value) {
+                    $.each(response, function(key, value) {
                         //CONSTRUCTION OF ROWS HAVING 
                         // DATA FROM JSON OBJECT
-                            if (value.isMyContact === true) {
-                                table_success += '<tr>';
-                                table_success += '<td>' + count + '</td>';
-                                table_success += '<td>'+value.name+'</td>';
-                                table_success += '<td>'+value.id.user+'</td>';
-                                
-                                if(!value.profilePicThumbObj.eurl){
-                                    table_success += '<td><img class="img-fluid" src="../public/imagens/sem-foto.jpg" style="width: 28px; height: 28px"></td>';
-                                }else{
-                                    table_success += '<td><a href="'+value.profilePicThumbObj.eurl+'" target="_blank" ><img class="img-fluid" src="'+value.profilePicThumbObj.eurl+'" style="width: 28px; height: 28px"></a></td>';
-                                }
-                                
-                                table_success += '</tr>';
-                                count++;
+                        if (value.isMyContact === true) {
+                            table_success += '<tr>';
+                            table_success += '<td>' + count + '</td>';
+                            table_success += '<td>' + value.name + '</td>';
+                            table_success += '<td>' + value.id.user + '</td>';
+
+                            if (!value.profilePicThumbObj.eurl) {
+                                table_success += '<td><img class="img-fluid" src="../public/imagens/sem-foto.jpg" style="width: 28px; height: 28px"></td>';
+                            } else {
+                                table_success += '<td><a href="' + value.profilePicThumbObj.eurl + '" target="_blank" ><img class="img-fluid" src="' + value.profilePicThumbObj.eurl + '" style="width: 28px; height: 28px"></a></td>';
                             }
-                            
+
+                            table_success += '</tr>';
+                            count++;
+                        }
+
                     });
-					table_success += '</tbody>';
-					table_success += '</table>';
+                    table_success += '</tbody>';
+                    table_success += '</table>';
                     $("#getAllContacts").html('<i class="fas fa-paper-plane"></i> Listar Contatos');
                     //
                     table_success += '</table>';
@@ -1856,18 +1857,18 @@ $('document').ready(function () {
         });
     });
     //
-    $("#getAllGroups").on("click", function () {
+    $("#getAllGroups").on("click", function() {
         $('#table_success').html('');
         var SessionName = $("#SessionName").val();
         event.preventDefault();
         $.ajax({
             type: "POST",
-            url: 'http://localhost:9000/sistema/getAllGroups',
+            url: 'http://10.10.0.210:9000/sistema/getAllGroups',
             data: { "SessionName": SessionName },
-            beforeSend: function () {
+            beforeSend: function() {
                 $("#getAllGroups").html('<i class="fas fa-spinner fa-spin"></i> Carregando...');
             },
-            success: function (response) {
+            success: function(response) {
                 console.log(response);
                 //https://www.geeksforgeeks.org/how-to-fetch-data-from-json-file-and-display-in-html-table-using-jquery/
                 $("#getAllGroups").html('<i class="fas fa-paper-plane"></i> Listar Grupos');
@@ -1922,34 +1923,34 @@ $('document').ready(function () {
                     var count = 1;
                     // ITERATING THROUGH OBJECTS
                     table_success += '<table id="org_tabela" class="table table-striped table-hover">';
-					table_success += '<thead class="thead-dark">';
+                    table_success += '<thead class="thead-dark">';
                     table_success += '<tr>';
                     table_success += '<th scope="col">#</th>';
                     table_success += '<th scope="col">Grupo</th>';
                     table_success += '<th scope="col">Foto Grupo</th>';
                     table_success += '</tr>';
-					table_success += '</thead>';
-					table_success += '<tbody id="table_success"></tbody>';
+                    table_success += '</thead>';
+                    table_success += '<tbody id="table_success"></tbody>';
 
-                    $.each(response, function (key, value) {
+                    $.each(response, function(key, value) {
                         //CONSTRUCTION OF ROWS HAVING 
                         // DATA FROM JSON OBJECT
-                            if (value.isGroup === true) {
-                                table_success += '<tr>';
-                                table_success += '<td>' + count + '</td>';
-                                table_success += '<td>'+value.contact.name+'</td>';
-                                if(!value.contact.profilePicThumbObj.eurl){
-                                    table_success += '<td><img class="img-fluid" src="../public/imagens/sem-foto.jpg" style="width: 28px; height: 28px"></td>';
-                                }else{
-                                    table_success += '<td><a href="'+value.contact.profilePicThumbObj.eurl+'" target="_blank" ><img class="img-fluid" src="'+value.contact.profilePicThumbObj.eurl+'" style="width: 28px; height: 28px"></a></td>';
-                                }
-                                table_success += '</tr>';
-                                count++;
+                        if (value.isGroup === true) {
+                            table_success += '<tr>';
+                            table_success += '<td>' + count + '</td>';
+                            table_success += '<td>' + value.contact.name + '</td>';
+                            if (!value.contact.profilePicThumbObj.eurl) {
+                                table_success += '<td><img class="img-fluid" src="../public/imagens/sem-foto.jpg" style="width: 28px; height: 28px"></td>';
+                            } else {
+                                table_success += '<td><a href="' + value.contact.profilePicThumbObj.eurl + '" target="_blank" ><img class="img-fluid" src="' + value.contact.profilePicThumbObj.eurl + '" style="width: 28px; height: 28px"></a></td>';
                             }
-                            
+                            table_success += '</tr>';
+                            count++;
+                        }
+
                     });
-					table_success += '</tbody>';
-					table_success += '</table>';
+                    table_success += '</tbody>';
+                    table_success += '</table>';
                     $("#getAllGroups").html('<i class="fas fa-paper-plane"></i> Listar Grupos');
                     //
                     table_success += '</table>';
